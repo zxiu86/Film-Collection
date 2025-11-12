@@ -1,0 +1,55 @@
+body {
+  background-color: #111; /* Dark mode */
+  color: white;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 2px solid blue; /* Flicker edge effect */
+}
+
+input#search {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+button {
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #0044ff; /* Blue glow */
+  color: white;
+}
+
+#movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.movie {
+  background-color: #222;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  width: 200px;
+  text-align: center;
+}
+
+.movie img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.movie button.watch {
+  background-color: #0033cc;
+  margin-top: 5px;
+}
