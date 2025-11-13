@@ -36,26 +36,37 @@
       margin-right: 15px;
     }
 
-    /* صندوق البحث مع أيقونة 🔍 */
+    /* البحث العصري 🔍 */
     .search-container {
       position: relative;
       display: inline-block;
     }
 
     .search-container input {
-      padding: 5px 30px 5px 10px; 
-      border-radius: 5px;
+      width: 30px; 
+      height: 30px;
+      border-radius: 15px;
       border: none;
+      padding: 0 10px 0 5px;
       font-size: 16px;
+      transition: width 0.3s ease;
+      background-color: #222;
+      color: white;
+    }
+
+    .search-container input:focus {
+      width: 150px; 
+      outline: none;
     }
 
     .search-container .search-icon {
       position: absolute;
-      right: 8px;
+      right: 5px;
       top: 50%;
       transform: translateY(-50%);
       pointer-events: none;
       font-size: 18px;
+      color: white;
     }
 
     .movie {
@@ -120,7 +131,7 @@
   <img src="logo.jpg" alt="logo">
   <h1>Film Collection</h1>
   <div class="search-container">
-    <input type="text" id="search" placeholder="ابحث عن فيلم...">
+    <input type="text" id="search">
     <span class="search-icon">🔍</span>
   </div>
 </header>
@@ -199,4 +210,4 @@
 </script>
 
 </body>
-    </html>
+</html>
