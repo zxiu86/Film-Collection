@@ -8,41 +8,49 @@
 </head>
 <body>
   <header>
-    <img src="logo.jpg" alt="Logo" id="logo">
+    <img src="images/logo.jpg" alt="logo">
     <h1>Film Collection</h1>
-    <button id="theme-toggle">🌙</button>
-    <button id="search-toggle">🔍</button>
+    <div id="search-container">
+      <svg id="search-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+        <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"/>
+      </svg>
+    </div>
   </header>
 
-  <div id="search-container">
-    <input type="text" id="search" placeholder="اكتب اسم الفيلم">
-  </div>
-
-  <section id="movies-list">
+  <section class="movies-list">
     <div class="movie">
-      <img src="test1.jpg" alt="Movie Poster" class="movie-poster">
+      <img src="images/test1.jpg" alt="Movie Poster">
       <h2>فيلم الاختبار 1</h2>
-      <button class="watch-btn" data-link="https://example.com/1" data-duration="120 دقيقة" data-rating="7.5" data-company="Studio 1">مشاهدة</button>
+      <div class="details">
+        <p class="rating">IMDb: 7.5</p>
+        <p class="duration">مدة: 120 دقيقة</p>
+        <button class="watch-btn" onclick="window.open('https://example.com', '_blank')">مشاهدة</button>
+        <button class="favorite-btn">إضافة للمفضلة</button>
+      </div>
     </div>
+
     <div class="movie">
-      <img src="test2.jpg" alt="Movie Poster" class="movie-poster">
+      <img src="images/test2.jpg" alt="Movie Poster">
       <h2>فيلم الاختبار 2</h2>
-      <button class="watch-btn" data-link="https://example.com/2" data-duration="110 دقيقة" data-rating="8.2" data-company="Studio 2">مشاهدة</button>
+      <div class="details">
+        <p class="rating">IMDb: 8.2</p>
+        <p class="duration">مدة: 110 دقيقة</p>
+        <button class="watch-btn" onclick="window.open('https://example.com', '_blank')">مشاهدة</button>
+        <button class="favorite-btn">إضافة للمفضلة</button>
+      </div>
+    </div>
+
+    <div class="movie">
+      <img src="images/test3.jpg" alt="Movie Poster">
+      <h2>فيلم الاختبار 3</h2>
+      <div class="details">
+        <p class="rating">IMDb: 6.9</p>
+        <p class="duration">مدة: 95 دقيقة</p>
+        <button class="watch-btn" onclick="window.open('https://example.com', '_blank')">مشاهدة</button>
+        <button class="favorite-btn">إضافة للمفضلة</button>
+      </div>
     </div>
   </section>
-
-  <!-- نافذة التفاصيل -->
-  <div id="movie-detail" class="hidden">
-    <div id="detail-content">
-      <span id="close-detail">✖</span>
-      <img id="detail-poster" src="" alt="Movie Poster">
-      <h2 id="detail-title"></h2>
-      <p id="detail-rating"></p>
-      <p id="detail-duration"></p>
-      <p id="detail-company"></p>
-      <button id="detail-watch">مشاهدة الفيلم</button>
-    </div>
-  </div>
 
   <script src="script.js"></script>
 </body>
