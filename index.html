@@ -4,33 +4,255 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Film Collection</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* الوضع العام */
+    body {
+      background-color: #0d0d0d; /* الوضع الغامق */
+      color: white;
+      font-family: "Tahoma", sans-serif;
+      margin: 0;
+      text-align: center;
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.light-mode {
+      background-color: #f2f2f2;
+      color: black;
+    }
+
+    header {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #1a1a1a;
+      box-shadow: 0 0 10px red;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    body.light-mode header {
+      background: #fff;
+      box-shadow: 0 0 10px #ff4444;
+    }
+
+    header img {
+      width: 80px;
+      height: auto;
+      margin-right: 10px;
+      filter: drop-shadow(0 0 8px red);
+      transition: filter 0.3s;
+    }
+    body.light-mode header img {
+      filter: drop-shadow(0 0 8px #ff4444);
+    }
+
+    header h1 {
+      font-size: 32px;
+      color: white;
+      text-shadow: 0 0 10px red;
+      margin: 0;
+    }
+    body.light-mode header h1 {
+      color: #ff4444;
+      text-shadow: 0 0 10px #ff4444;
+    }
+
+    /* أيقونة البحث */
+    #search-btn {
+      margin-left: 15px;
+      cursor: pointer;
+    }
+    #search-btn svg path {
+      fill: white;
+      transition: fill 0.3s;
+    }
+    body.light-mode #search-btn svg path {
+      fill: black;
+    }
+
+    /* نافذة البحث */
+    #search-popup {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #222;
+      padding: 10px 20px;
+      border-radius: 25px;
+      z-index: 1000;
+    }
+    body.light-mode #search-popup {
+      background: #ddd;
+    }
+    #search-popup input {
+      padding: 5px 10px;
+      border-radius: 15px;
+      border: none;
+      width: 200px;
+    }
+
+    /* الأفلام */
+    .movie {
+      margin: 50px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 1.5s ease;
+      max-width: 500px;
+      cursor: pointer;
+    }
+    .movie img {
+      width: 80%;
+      max-width: 500px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px red;
+      transition: transform 0.3s ease;
+    }
+    body.light-mode .movie img {
+      box-shadow: 0 0 15px #ff4444;
+    }
+    .movie img:hover {
+      transform: scale(1.05);
+    }
+    .movie h2 {
+      margin-top: 15px;
+      font-size: 28px;
+      color: #ff4444;
+    }
+    body.light-mode .movie h2 {
+      color: #ff4444;
+    }
+
+    /* زر المشاهدة */
+    .watch-btn {
+      background: transparent;
+      border: 2px solid red;
+      color: white;
+      padding: 10px 30px;
+      font-size: 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: all 0.3s ease;
+    }
+    .watch-btn:hover {
+      background: red;
+      color: white;
+      box-shadow: 0 0 15px red;
+    }
+    body.light-mode .watch-btn {
+      color: red;
+      border: 2px solid red;
+    }
+    body.light-mode .watch-btn:hover {
+      background: red;
+      color: white;
+    }
+
+    /* نافذة تفاصيل الفيلم */
+    #details-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #222;
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      z-index: 1001;
+      max-width: 400px;
+      text-align: center;
+    }
+    body.light-mode #details-popup {
+      background: #fff;
+      color: black;
+    }
+    #details-popup button {
+      margin-top: 15px;
+      padding: 8px 20px;
+      border-radius: 20px;
+      border: 2px solid red;
+      background: transparent;
+      cursor: pointer;
+    }
+    #details-popup button:hover {
+      background: red;
+      color: white;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
+
   <header>
-    <img src="logo.jpg" alt="Logo" class="logo" id="logo">
+    <img src="logo.jpg" alt="Logo">
     <h1>Film Collection</h1>
-    <div class="search-icon" id="search-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30">
-        <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
+    <div id="search-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+        <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"/>
       </svg>
     </div>
-    <div class="toggle-btn" onclick="toggleMode()">🌙</div>
   </header>
 
-  <!-- صندوق البحث المنبثق -->
   <div id="search-popup">
     <input type="text" id="search-input" placeholder="ابحث عن فيلم...">
-    <button id="close-search">×</button>
   </div>
 
-  <!-- قسم الأفلام -->
-  <section class="movie">
+  <section class="movie" data-link="https://example.com">
     <img src="test1.jpg" alt="Movie Poster">
     <h2>فيلم الاختبار</h2>
-    <button class="watch-btn" onclick="window.open('https://example.com', '_blank')">مشاهدة</button>
+    <button class="watch-btn">مشاهدة</button>
   </section>
 
-  <script src="script.js"></script>
+  <div id="details-popup"></div>
+
+  <script>
+    // التبديل بين وضع الفاتح والغامق
+    const toggleDark = () => { document.body.classList.toggle('light-mode'); };
+
+    // أيقونة البحث
+    const searchBtn = document.getElementById('search-btn');
+    const searchPopup = document.getElementById('search-popup');
+    const searchInput = document.getElementById('search-input');
+    const movies = document.querySelectorAll('.movie');
+
+    searchBtn.addEventListener('click', () => {
+      searchPopup.style.display = (searchPopup.style.display === 'block') ? 'none' : 'block';
+      searchInput.focus();
+    });
+
+    searchInput.addEventListener('input', function() {
+      const query = this.value.toLowerCase();
+      movies.forEach(movie => {
+        const title = movie.querySelector('h2').textContent.toLowerCase();
+        movie.style.display = title.includes(query) ? 'flex' : 'none';
+      });
+    });
+
+    // نافذة تفاصيل الفيلم
+    const detailsPopup = document.getElementById('details-popup');
+    movies.forEach(movie => {
+      movie.addEventListener('click', () => {
+        const title = movie.querySelector('h2').textContent;
+        const poster = movie.querySelector('img').src;
+        const watchLink = movie.getAttribute('data-link');
+        detailsPopup.innerHTML = `
+          <img src="${poster}" alt="${title}" style="width:80%; border-radius:10px; margin-bottom:10px;">
+          <h2>${title}</h2>
+          <p>رابط المشاهدة:</p>
+          <a href="${watchLink}" target="_blank">
+            <button>مشاهدة</button>
+          </a>
+          <button onclick="detailsPopup.style.display='none'">إغلاق</button>
+        `;
+        detailsPopup.style.display = 'block';
+      });
+    });
+  </script>
 </body>
-</html>
+      </html>
