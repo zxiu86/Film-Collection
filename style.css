@@ -1,8 +1,8 @@
 body {
-  margin: 0;
-  font-family: "Tahoma", sans-serif;
-  background-color: #0d0d0d;
+  background-color: #111;
   color: white;
+  font-family: "Tahoma", sans-serif;
+  margin: 0;
   text-align: center;
 }
 
@@ -12,52 +12,45 @@ header {
   align-items: center;
   padding: 20px;
   background: #1a1a1a;
-  gap: 10px;
+  box-shadow: 0 0 10px red;
 }
 
 header img {
   width: 80px;
   height: auto;
+  margin-right: 10px;
 }
 
-#theme-toggle, #search-toggle {
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: white;
+header h1 {
+  font-size: 32px;
+  text-shadow: 0 0 10px red;
 }
 
 #search-container {
-  margin: 15px 0;
-  display: none;
+  margin-left: 15px;
+  cursor: pointer;
 }
 
-#search-container input {
-  padding: 5px 10px;
-  width: 200px;
-  border-radius: 10px;
-  border: none;
-}
-
-#movies-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.movie {
+.movies-list {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 50px;
+}
+
+.movie {
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
 }
 
 .movie img {
-  width: 250px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.3s;
+  width: 60%;
+  max-width: 500px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px red;
 }
 
 .movie img:hover {
@@ -65,85 +58,31 @@ header img {
 }
 
 .movie h2 {
-  margin-top: 10px;
+  margin-top: 15px;
+  font-size: 28px;
   color: #ff4444;
 }
 
-.watch-btn {
+.details {
+  display: none;
+  flex-direction: column;
+  align-items: center;
   margin-top: 10px;
-  padding: 10px 20px;
-  border-radius: 25px;
+}
+
+.watch-btn, .favorite-btn {
+  margin-top: 10px;
+  padding: 10px 25px;
+  font-size: 16px;
+  border-radius: 20px;
   border: 2px solid red;
   background: transparent;
   color: white;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
-.watch-btn:hover {
+.watch-btn:hover, .favorite-btn:hover {
   background: red;
   color: white;
 }
-
-#movie-detail {
-  position: fixed;
-  top:0; left:0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-#detail-content {
-  background: #222;
-  padding: 20px;
-  border-radius: 15px;
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-  position: relative;
-}
-
-#detail-content img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-#close-detail {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
-
-/* وضع الفاتح */
-body.light-mode {
-  background: #f0f0f0;
-  color: black;
-}
-
-body.light-mode header {
-  background: #ddd;
-}
-
-body.light-mode #theme-toggle,
-body.light-mode #search-toggle {
-  color: black;
-}
-
-body.light-mode .watch-btn {
-  border-color: #ff4444;
-  color: black;
-}
-
-body.light-mode .watch-btn:hover {
-  background: #ff4444;
-  color: white;
-  }
