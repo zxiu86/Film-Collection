@@ -1,24 +1,51 @@
-const searchIcon = document.getElementById("search-icon");
-const searchPopup = document.getElementById("search-popup");
-const closeSearch = document.getElementById("close-search");
-const searchInput = document.getElementById("search-input");
+// البحث
+const searchBtn = document.getElementById('search-btn');
+const searchPopup = document.getElementById('search-popup');
+const searchInput = document.getElementById('search-input');
+const movies = document.querySelectorAll('.movie');
 
-searchIcon.addEventListener("click", () => {
-  searchPopup.classList.add("show");
-  searchInput.focus();
+searchBtn.addEventListener('click', () => {
+  searchPopup.style.display = (searchPopup.style.display === 'block') ? 'none' : 'block';
 });
 
-closeSearch.addEventListener("click", () => {
-  searchPopup.classList.remove("show");
+searchInput.addEventListener('input', function() {
+  const query = this.value.toLowerCase();
+  movies.forEach(movie => {
+    const title = movie.querySelector('h2').textContent.toLowerCase();
+    if (title.includes(query)) {
+      movie.style.display = 'flex';
+    } else {
+      movie.style.display = 'none';
+    }
+  });
 });
 
-// وضع الليل/النهار (غامق/فاتح)
-function toggleMode() {
-  if (document.body.style.backgroundColor === "white") {
-    document.body.style.backgroundColor = "#0d0d0d";
-    document.body.style.color = "white";
-  } else {
-    document.body.style.backgroundColor = "white";
-    document.body.style.color = "black";
-  }
-}
+// نافذة تفاصيل الفيلم
+const detailsPopup = document.getElementById('details-popup');
+
+movies.forEach(movie => {
+  movie.addEventListener('click', () => {
+    const title = movie.querySelector('h2').textContent;
+    const poster = movie.querySelector('img').src;
+    const watchLink = movie.querySelector('.watch-btn').getAttribute('data-link') || '#';
+    const rating = movie.querySelector('.rating') ? movie.querySelector('.rating').textContent : 'IMDb: N/A';
+    const duration = movie.querySelector('.duration') ? movie.querySelector('.duration').textContent : 'Duration: N/A';
+
+    detailsPopup.innerHTML = `
+      <img src="${poster}" alt="${title}" style="width:80%; border-radius:10px; margin-bottom:10px;">
+      <h2>${title}</h2>
+      <p>${rating}</p>
+      <p>${duration}</p>
+      <a href="${watchLink}" target="_blank">
+        <button>مشاهدة</button>
+      </a>
+      <button onclick="detailsPopup.style.display='none'">إغلاق</button>
+    `;
+    detailsPopup.style.display = 'block';
+  });
+});
+
+// التبديل بين الوضع الفاتح والغامق
+const toggleDark = () => {
+  document.body.classList.toggle('light-mode');
+};
