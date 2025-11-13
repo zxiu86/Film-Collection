@@ -4,70 +4,136 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Film Collection</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: white;
+      font-family: "Tahoma", sans-serif;
+      margin: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #1a1a1a;
+      box-shadow: 0 0 10px red;
+      position: relative;
+    }
+
+    header img {
+      width: 80px;
+      height: auto;
+      margin-right: 10px;
+      filter: drop-shadow(0 0 8px red);
+    }
+
+    header h1 {
+      font-size: 32px;
+      color: white;
+      text-shadow: 0 0 10px red;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    .movie {
+      margin-top: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .movie img {
+      width: 60%;
+      max-width: 500px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px red;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .movie img:hover {
+      transform: scale(1.05);
+    }
+
+    .movie h2 {
+      margin-top: 15px;
+      font-size: 28px;
+      color: #ff4444;
+    }
+
+    .watch-btn {
+      background: transparent;
+      border: 2px solid red;
+      color: white;
+      padding: 10px 30px;
+      font-size: 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: all 0.3s ease;
+      display: none; /* مخفي حتى تضغط على الفيلم */
+    }
+
+    .watch-btn:hover {
+      background: red;
+      color: white;
+      box-shadow: 0 0 15px red;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
   <header>
-    <img src="logo.jpg" alt="Logo" class="logo">
+    <img src="logo.jpg" alt="logo">
     <h1>Film Collection</h1>
-    <div class="search-container">
-      <svg id="search-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
-        <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"/>
-      </svg>
-    </div>
+    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30">
+      <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
+    </svg>
   </header>
 
-  <div id="movies-list">
-    <div class="movie">
-      <img src="test1.jpg" alt="Movie Poster">
-      <h2>فيلم الاختبار</h2>
-    </div>
-    <div class="movie">
-      <img src="test2.jpg" alt="Movie Poster">
-      <h2>فيلم الاختبار 2</h2>
-    </div>
-  </div>
+  <section class="movie">
+    <img src="test1.jpg" alt="Movie Poster" onclick="showDetails(this)">
+    <h2>فيلم الاختبار 1</h2>
+    <button class="watch-btn" onclick="window.open('https://example.com', '_blank')">مشاهدة</button>
+  </section>
 
-  <!-- نافذة pop-up -->
-  <div id="popup" class="popup">
-    <div class="popup-content">
-      <span id="close-popup" class="close">&times;</span>
-      <h2 id="popup-title"></h2>
-      <img id="popup-image" src="" alt="Movie Poster">
-      <p id="popup-description"></p>
-      <p id="popup-rating"></p>
-      <p id="popup-duration"></p>
-      <p id="popup-company"></p>
-      <a id="popup-link" href="#" target="_blank" class="watch-btn">مشاهدة</a>
-    </div>
-  </div>
+  <section class="movie">
+    <img src="test2.jpg" alt="Movie Poster" onclick="showDetails(this)">
+    <h2>فيلم الاختبار 2</h2>
+    <button class="watch-btn" onclick="window.open('https://example.com', '_blank')">مشاهدة</button>
+  </section>
 
-  <script src="script.js"></script>
-</body>
-</html>s="details hidden">
-        <p class="rating">IMDb: 8.2</p>
-        <p class="duration">مدة: 110 دقيقة</p>
-        <button class="watch-btn" onclick="window.open('https://example.com','_blank')">مشاهدة</button>
-        <button class="favorite-btn">إضافة للمفضلة</button>
-      </div>
-    </div>
+  <section class="movie">
+    <img src="test3.jpg" alt="Movie Poster" onclick="showDetails(this)">
+    <h2>فيلم الاختبار 3</h2>
+    <button class="watch-btn" onclick="window.open('https://example.com', '_blank')">مشاهدة</button>
+  </section>
 
-    <div class="movie" data-title="فيلم الاختبار 3">
-      <img src="images/test3.jpg" alt="Movie Poster">
-      <h2>فيلم الاختبار 3</h2>
-      <div class="details hidden">
-        <p class="rating">IMDb: 6.9</p>
-        <p class="duration">مدة: 95 دقيقة</p>
-        <button class="watch-btn" onclick="window.open('https://example.com','_blank')">مشاهدة</button>
-        <button class="favorite-btn">إضافة للمفضلة</button>
-   <!-- أيقونة البحث -->
-<svg id="search-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30">
-  <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
-</svg>
-   </div>
-    </div>
-  </main>
+  <script>
+    function showDetails(imgElement) {
+      const movieSection = imgElement.parentElement;
+      const btn = movieSection.querySelector('.watch-btn');
+      btn.style.display = 'block';
+      // يمكن لاحقاً تضيف تقييم ومدة هنا
+    }
 
-  <script src="script.js"></script>
+    // مثال فتح البحث عند الضغط على الأيقونة
+    document.querySelector('.search-icon').addEventListener('click', () => {
+      alert("فتح البحث عن الأفلام"); 
+    });
+  </script>
 </body>
 </html>
