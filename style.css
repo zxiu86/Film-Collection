@@ -1,12 +1,21 @@
+/* الوضع العام */
 body {
-  background-color: #0d0d0d;
+  background-color: #0d0d0d; /* الوضع الغامق */
   color: white;
   font-family: "Tahoma", sans-serif;
   margin: 0;
   text-align: center;
   overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
 }
 
+/* الوضع الفاتح */
+body.light-mode {
+  background-color: #f2f2f2;
+  color: black;
+}
+
+/* الهيدر */
 header {
   padding: 20px;
   display: flex;
@@ -14,40 +23,99 @@ header {
   align-items: center;
   background: #1a1a1a;
   box-shadow: 0 0 10px red;
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
+body.light-mode header {
+  background: #fff;
+  box-shadow: 0 0 10px #ff4444;
+}
+
+/* شعار الموقع */
 header img {
   width: 80px;
   height: auto;
   margin-right: 10px;
   filter: drop-shadow(0 0 8px red);
+  transition: filter 0.3s;
 }
 
+body.light-mode header img {
+  filter: drop-shadow(0 0 8px #ff4444);
+}
+
+/* عنوان الموقع */
 header h1 {
   font-size: 32px;
   color: white;
   text-shadow: 0 0 10px red;
+  margin: 0;
 }
 
-.search-icon {
+body.light-mode header h1 {
+  color: #ff4444;
+  text-shadow: 0 0 10px #ff4444;
+}
+
+/* أيقونة البحث */
+#search-btn {
+  margin-left: 15px;
   cursor: pointer;
-  margin-left: 10px;
 }
 
+#search-btn svg path {
+  fill: white;
+  transition: fill 0.3s;
+}
+
+body.light-mode #search-btn svg path {
+  fill: black;
+}
+
+/* نافذة البحث */
+#search-popup {
+  display: none; /* مخفي افتراضياً */
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  padding: 10px 20px;
+  border-radius: 25px;
+  z-index: 1000;
+}
+
+body.light-mode #search-popup {
+  background: #ddd;
+}
+
+#search-popup input {
+  padding: 5px 10px;
+  border-radius: 15px;
+  border: none;
+  width: 200px;
+}
+
+/* الأفلام */
 .movie {
-  margin-top: 50px;
+  margin: 50px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   animation: fadeIn 1.5s ease;
+  max-width: 500px;
 }
 
 .movie img {
-  width: 60%;
+  width: 80%;
   max-width: 500px;
   border-radius: 15px;
   box-shadow: 0 0 20px red;
   transition: transform 0.3s ease;
+}
+
+body.light-mode .movie img {
+  box-shadow: 0 0 15px #ff4444;
 }
 
 .movie img:hover {
@@ -60,6 +128,11 @@ header h1 {
   color: #ff4444;
 }
 
+body.light-mode .movie h2 {
+  color: #ff4444;
+}
+
+/* زر المشاهدة */
 .watch-btn {
   background: transparent;
   border: 2px solid red;
@@ -78,70 +151,53 @@ header h1 {
   box-shadow: 0 0 15px red;
 }
 
-/* صندوق البحث المنبثق */
-#search-popup {
+body.light-mode .watch-btn {
+  color: red;
+  border: 2px solid red;
+}
+
+body.light-mode .watch-btn:hover {
+  background: red;
+  color: white;
+}
+
+/* نافذة التفاصيل */
+#details-popup {
+  display: none;
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background: #1a1a1a;
-  padding: 20px 30px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px red;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 1000;
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-}
-
-#search-popup.show {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-#search-popup input {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: none;
-  margin-bottom: 10px;
-}
-
-#search-popup button {
-  background: red;
-  border: none;
+  transform: translate(-50%, -50%);
+  background: #222;
   color: white;
-  font-size: 20px;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  padding: 20px;
+  border-radius: 15px;
+  z-index: 1001;
+  max-width: 400px;
+  text-align: center;
+}
+
+body.light-mode #details-popup {
+  background: #fff;
+  color: black;
+}
+
+#details-popup button {
+  margin-top: 15px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 2px solid red;
+  background: transparent;
   cursor: pointer;
 }
 
+#details-popup button:hover {
+  background: red;
+  color: white;
+}
+
+/* الرسوم */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
-  }
-.movie {
-  display: flex;
-  flex-direction: column;
-  align-items: center;   /* كل شيء بمحاذاة الوسط أفقياً */
-  justify-content: center; /* كل شيء بمحاذاة الوسط عمودياً */
-  margin: 50px auto;    /* تلقائي أفقياً */
-  }
-body.light-mode .watch-btn {
-    border: 2px solid red;
-    color: red;
-}
-body.light-mode .watch-btn:hover {
-    background: red;
-    color: white;
-  }
-.dark-mode svg path {
-    fill: white;
-}
-.light-mode svg path {
-    fill: black;
-  }
+    }
