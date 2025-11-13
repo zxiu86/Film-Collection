@@ -1,254 +1,112 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Film Collection — Admin</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Film Collection</title>
 <style>
-  :root{
-    --bg:#0d0d0d; --card:#151515; --accent:#007bff; --red:#ff4444; --muted:#999;
-    --radius:14px;
+  body {
+    background-color: #0d0d0d;
+    color: white;
+    font-family: "Tahoma", sans-serif;
+    margin: 0;
+    text-align: center;
   }
-  *{box-sizing:border-box}
-  body{
-    margin:0; font-family:Tahoma, Arial, sans-serif; background:var(--bg); color:#fff;
-    -webkit-font-smoothing:antialiased;
+
+  header {
+    padding: 20px;
+    background: #1a1a1a;
+    box-shadow: 0 0 10px red;
+    position: relative;
   }
-  header{display:flex;align-items:center;justify-content:center;padding:18px;background:#111;position:relative}
-  header h1{margin:0;font-size:20px;letter-spacing:1px}
-  header .admin-toggle{position:absolute;left:12px;background:transparent;border:1px solid rgba(255,255,255,0.08);color:#fff;padding:8px 10px;border-radius:10px;cursor:pointer}
-  main{padding:16px; max-width:960px;margin:0 auto}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}
-  .card{background:var(--card);border-radius:12px;padding:10px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,0.5)}
-  .card img{width:100%;height:220px;object-fit:cover;border-radius:8px;cursor:pointer}
-  .card h3{margin:8px 0 0;font-size:16px;color:#ffccd1}
-  .empty{color:var(--muted);padding:40px;text-align:center}
-  /* popup detail */
-  .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:60}
-  .overlay.show{display:flex}
-  .detail{background:#111;padding:18px;border-radius:14px;max-width:540px;width:92%;color:#fff}
-  .detail img{width:100%;border-radius:10px;max-height:320px;object-fit:cover}
-  .detail h2{margin:10px 0 4px}
-  .detail p{margin:6px 0;color:var(--muted)}
-  .btn{display:inline-block;padding:8px 14px;border-radius:10px;border:none;cursor:pointer}
-  .btn-primary{background:var(--accent);color:#fff}
-  .btn-red{background:var(--red);color:#fff}
-  /* admin form */
-  .admin-panel{position:fixed;right:12px;bottom:12px;background:linear-gradient(180deg,#171717,#0f0f0f);padding:12px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.6);z-index:70;display:none;min-width:300px}
-  .admin-panel.show{display:block}
-  .admin-panel h3{margin:0 0 8px;font-size:15px}
-  .field{margin-bottom:8px}
-  .field label{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
-  .field input[type="text"], .field textarea{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:#0b0b0b;color:#fff;font-size:14px}
-  .field input[type="file"]{color:var(--muted)}
-  .row{display:flex;gap:8px}
-  .small{flex:1}
-  .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
-  footer{padding:18px;text-align:center;color:var(--muted);font-size:13px}
-  @media(max-width:480px){
-    .card img{height:160px}
+
+  .search-icon {
+    position: absolute;
+    left: 20px;
+    cursor: pointer;
   }
+
+  .movie {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .movie img {
+    width: 60%;
+    max-width: 500px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px red;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .movie img:hover { transform: scale(1.05); }
+
+  .movie h2 { margin-top: 15px; font-size: 28px; color: #ff4444; }
+
+  .btn {
+    margin-top: 10px;
+    padding: 10px 25px;
+    border-radius: 25px;
+    border: 2px solid red;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover { background: red; box-shadow: 0 0 15px red; }
+
 </style>
 </head>
 <body>
 
 <header>
-  <button class="admin-toggle" id="adminOpen">ادمن</button>
   <h1>Film Collection</h1>
+  <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30">
+    <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
+  </svg>
 </header>
 
-<main>
-  <div id="listWrap">
-    <div id="grid" class="grid"></div>
-    <div id="emptyMsg" class="empty" style="display:none">ماكو أفلام بعد — اضغط ادمن عشان تضيف</div>
-  </div>
-</main>
+<section class="movie">
+  <img src="test1.jpg" alt="Movie Poster" onclick="showDetails(this)">
+  <h2>فيلم الاختبار 1</h2>
+  <button class="btn watch-btn" onclick="window.open('https://example.com', '_blank')">مشاهدة</button>
+  <button class="btn delete-btn" onclick="deleteMovie(this)">حذف</button>
+</section>
 
-<!-- detail popup -->
-<div id="overlay" class="overlay" aria-hidden="true">
-  <div class="detail" role="dialog">
-    <img id="detailImg" src="" alt="">
-    <h2 id="detailTitle"></h2>
-    <p id="detailDesc"></p>
-    <p id="detailMeta" style="color:var(--muted)"></p>
-    <div style="margin-top:10px;text-align:left">
-      <a id="detailLink" class="btn btn-primary" target="_blank" rel="noopener">شاهد</a>
-      <button id="closeDetail" class="btn" style="margin-left:8px">إغلاق</button>
-    </div>
-  </div>
-</div>
+<section class="movie">
+  <img src="test2.jpg" alt="Movie Poster" onclick="showDetails(this)">
+  <h2>فيلم الاختبار 2</h2>
+  <button class="btn watch-btn" onclick="window.open('https://example.com', '_blank')">مشاهدة</button>
+  <button class="btn delete-btn" onclick="deleteMovie(this)">حذف</button>
+</section>
 
-<!-- admin panel -->
-<div id="admin" class="admin-panel" aria-hidden="true">
-  <h3>إضافة فيلم جديد</h3>
-  <div class="field">
-    <label>اسم الفيلم</label>
-    <input id="fTitle" type="text" placeholder="أدخل اسم الفيلم">
-  </div>
-  <div class="field">
-    <label>وصف قصير</label>
-    <textarea id="fDesc" rows="3" placeholder="ملخص قصير"></textarea>
-  </div>
-  <div class="row">
-    <div class="field small">
-      <label>التقييم (مثال 7.5)</label>
-      <input id="fRating" type="text" placeholder="IMDb: 7.5">
-    </div>
-    <div class="field small">
-      <label>المدة</label>
-      <input id="fDuration" type="text" placeholder="120 دقيقة">
-    </div>
-  </div>
-  <div class="field">
-    <label>رابط المشاهدة (URL)</label>
-    <input id="fLink" type="text" placeholder="https://">
-  </div>
-  <div class="field">
-    <label>صورة (اختياري)</label>
-    <input id="fImage" type="file" accept="image/*">
-  </div>
-
-  <div class="actions">
-    <button id="saveBtn" class="btn btn-primary">حفظ</button>
-    <button id="closeAdmin" class="btn">إلغاء</button>
-  </div>
-  <div style="margin-top:8px;color:var(--muted);font-size:12px">البيانات تحفظ محليًا في جهازك فقط.</div>
-</div>
-
-<footer>تجربة سريعة — محفوظ محلياً</footer>
+<section class="movie">
+  <img src="test3.jpg" alt="Movie Poster" onclick="showDetails(this)">
+  <h2>فيلم الاختبار 3</h2>
+  <button class="btn watch-btn" onclick="window.open('https://example.com', '_blank')">مشاهدة</button>
+  <button class="btn delete-btn" onclick="deleteMovie(this)">حذف</button>
+</section>
 
 <script>
-/* ---------- helper & storage ---------- */
-const KEY = 'film_collection_v1';
-
-function loadData(){
-  try{
-    const raw = localStorage.getItem(KEY);
-    return raw ? JSON.parse(raw) : [];
-  }catch(e){ return [];}
-}
-function saveData(arr){
-  try{
-    localStorage.setItem(KEY, JSON.stringify(arr));
-  }catch(e){ alert('فشل الحفظ: ' + e.message); }
+function showDetails(imgElement) {
+  const movieSection = imgElement.parentElement;
+  const btn = movieSection.querySelector('.watch-btn');
+  btn.style.display = 'block';
 }
 
-/* ---------- render ---------- */
-const grid = document.getElementById('grid');
-const emptyMsg = document.getElementById('emptyMsg');
-function render(){
-  const items = loadData();
-  grid.innerHTML = '';
-  if(items.length === 0){
-    emptyMsg.style.display = 'block';
-    return;
-  } else emptyMsg.style.display = 'none';
-
-  items.forEach((it, idx)=>{
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-      <img data-idx="${idx}" src="${it.image || placeholderDataURI()}" alt="${escapeHTML(it.title)}">
-      <h3>${escapeHTML(it.title)}</h3>
-    `;
-    grid.appendChild(card);
-  });
+function deleteMovie(btn) {
+  const movieSection = btn.parentElement;
+  movieSection.remove();
 }
 
-/* ---------- placeholder image (tiny) ---------- */
-function placeholderDataURI(){
-  return 'data:image/svg+xml;utf8,' + encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect fill="#222" width="100%" height="100%"/><text x="50%" y="50%" font-family="Tahoma,Arial" font-size="22" fill="#777" dominant-baseline="middle" text-anchor="middle">No Image</text></svg>`
-  );
-}
-
-/* ---------- escape simple ---------- */
-function escapeHTML(s){ return String(s || '').replace(/[&<>"']/g, ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])); }
-
-/* ---------- admin controls ---------- */
-const adminBtn = document.getElementById('adminOpen');
-const adminPanel = document.getElementById('admin');
-const closeAdmin = document.getElementById('closeAdmin');
-const saveBtn = document.getElementById('saveBtn');
-
-adminBtn.addEventListener('click', ()=> adminPanel.classList.toggle('show'));
-closeAdmin.addEventListener('click', ()=> adminPanel.classList.remove('show'));
-
-/* ---------- add movie ---------- */
-saveBtn.addEventListener('click', async ()=>{
-  const title = document.getElementById('fTitle').value.trim();
-  if(!title){ alert('اكتب اسم الفيلم'); return; }
-  const desc = document.getElementById('fDesc').value.trim();
-  const rating = document.getElementById('fRating').value.trim();
-  const duration = document.getElementById('fDuration').value.trim();
-  const link = document.getElementById('fLink').value.trim();
-  const file = document.getElementById('fImage').files[0];
-
-  let imageData = '';
-  if(file){
-    try{
-      imageData = await readFileAsDataURL(file); // base64
-    }catch(e){ alert('فشل قراءة الصورة'); }
-  }
-
-  const arr = loadData();
-  arr.push({ title, description: desc, rating, duration, link, image: imageData });
-  saveData(arr);
-  adminPanel.classList.remove('show');
-  clearAdminForm();
-  render();
+document.querySelector('.search-icon').addEventListener('click', () => {
+  alert("فتح البحث عن الأفلام"); 
 });
-
-/* ---------- read file util ---------- */
-function readFileAsDataURL(file){
-  return new Promise((res, rej)=>{
-    const r = new FileReader();
-    r.onload = ()=> res(r.result);
-    r.onerror = ()=> rej(new Error('file read error'));
-    r.readAsDataURL(file);
-  });
-}
-function clearAdminForm(){
-  document.getElementById('fTitle').value='';
-  document.getElementById('fDesc').value='';
-  document.getElementById('fRating').value='';
-  document.getElementById('fDuration').value='';
-  document.getElementById('fLink').value='';
-  document.getElementById('fImage').value='';
-}
-
-/* ---------- click on movie => open detail ---------- */
-const overlay = document.getElementById('overlay');
-const detailImg = document.getElementById('detailImg');
-const detailTitle = document.getElementById('detailTitle');
-const detailDesc = document.getElementById('detailDesc');
-const detailMeta = document.getElementById('detailMeta');
-const detailLink = document.getElementById('detailLink');
-const closeDetail = document.getElementById('closeDetail');
-
-grid.addEventListener('click', (e)=>{
-  const img = e.target.closest('img[data-idx]');
-  if(!img) return;
-  const idx = Number(img.dataset.idx);
-  const arr = loadData();
-  const it = arr[idx];
-  if(!it) return;
-  detailImg.src = it.image || placeholderDataURI();
-  detailTitle.textContent = it.title;
-  detailDesc.textContent = it.description || '';
-  detailMeta.textContent = `${it.rating ? 'التقييم: '+it.rating+' • ' : ''}${it.duration ? 'المدة: '+it.duration : ''}`;
-  detailLink.href = it.link || '#';
-  overlay.classList.add('show');
-});
-closeDetail.addEventListener('click', ()=> overlay.classList.remove('show'));
-overlay.addEventListener('click', (ev)=> { if(ev.target === overlay) overlay.classList.remove('show'); });
-
-/* ---------- search in header (small icon not needed, use native find) ---------- */
-/* optional: add search later - for now keep UI minimal */
-
-/* ---------- boot ---------- */
-render();
 </script>
 
 </body>
-  </html>
+</html>
