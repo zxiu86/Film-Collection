@@ -4,12 +4,7 @@ body {
   font-family: "Tahoma", sans-serif;
   margin: 0;
   text-align: center;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-body.light {
-  background-color: #f5f5f5;
-  color: black;
+  overflow-x: hidden;
 }
 
 header {
@@ -17,25 +12,15 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   background: #1a1a1a;
   box-shadow: 0 0 10px red;
 }
 
-body.light header {
-  background: #e0e0e0;
-  box-shadow: 0 0 10px orange;
-}
-
-header img.logo {
+header img {
   width: 80px;
   height: auto;
   margin-right: 10px;
   filter: drop-shadow(0 0 8px red);
-}
-
-body.light header img.logo {
-  filter: drop-shadow(0 0 8px orange);
 }
 
 header h1 {
@@ -44,43 +29,24 @@ header h1 {
   text-shadow: 0 0 10px red;
 }
 
-body.light header h1 {
-  color: black;
-  text-shadow: 0 0 10px orange;
-}
-
-.search-icon svg path {
-  fill: white;
-  transition: fill 0.3s;
-}
-
-body.light .search-icon svg path {
-  fill: black;
-}
-
-.toggle-btn {
+.search-icon {
   cursor: pointer;
-  font-size: 24px;
-  margin-left: 20px;
-}
-
-#movies-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 20px;
-  gap: 30px;
+  margin-left: 10px;
 }
 
 .movie {
-  cursor: pointer;
-  width: 200px;
-  text-align: center;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 1.5s ease;
 }
 
 .movie img {
-  width: 100%;
+  width: 60%;
+  max-width: 500px;
   border-radius: 15px;
+  box-shadow: 0 0 20px red;
   transition: transform 0.3s ease;
 }
 
@@ -88,42 +54,31 @@ body.light .search-icon svg path {
   transform: scale(1.05);
 }
 
-/* تفاصيل الفلم */
-#movie-details.hidden {
-  display: none;
+.movie h2 {
+  margin-top: 15px;
+  font-size: 28px;
+  color: #ff4444;
 }
 
-#movie-details {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0,0,0,0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.details-content {
-  background-color: #222;
-  padding: 20px;
-  border-radius: 15px;
-  text-align: center;
-  width: 90%;
-  max-width: 400px;
-}
-
-body.light .details-content {
-  background-color: #fff;
-  color: black;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 20px;
+.watch-btn {
+  background: transparent;
+  border: 2px solid red;
+  color: white;
+  padding: 10px 30px;
+  font-size: 18px;
+  border-radius: 25px;
   cursor: pointer;
-  font-size: 24px;
+  margin-top: 15px;
+  transition: all 0.3s ease;
 }
 
+.watch-btn:hover {
+  background: red;
+  color: white;
+  box-shadow: 0 0 15px red;
+}
+
+/* صندوق البحث المنبثق */
 #search-popup {
   position: fixed;
   top: 50%;
@@ -164,3 +119,8 @@ body.light .details-content {
   height: 35px;
   cursor: pointer;
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+  }
