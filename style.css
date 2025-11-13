@@ -131,3 +131,17 @@ header h1 {
   justify-content: center; /* كل شيء بمحاذاة الوسط عمودياً */
   margin: 50px auto;    /* تلقائي أفقياً */
   }
+body.light-mode .watch-btn {
+    border: 2px solid red;
+    color: red;
+}
+body.light-mode .watch-btn:hover {
+    background: red;
+    color: white;
+  }
+.dark-mode svg path {
+    fill: white;
+}
+.light-mode svg path {
+    fill: black;
+  }
