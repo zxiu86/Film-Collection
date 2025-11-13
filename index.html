@@ -23,7 +23,7 @@
     }
 
     header img {
-      width: 67px;
+      width: 60px;
       height: auto;
       margin-right: 10px;
       filter: drop-shadow(0 0 8px red);
@@ -36,11 +36,26 @@
       margin-right: 15px;
     }
 
-    input#search {
-      padding: 5px 10px;
+    /* صندوق البحث مع أيقونة 🔍 */
+    .search-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .search-container input {
+      padding: 5px 30px 5px 10px; 
       border-radius: 5px;
       border: none;
-      margin-left: 10px;
+      font-size: 16px;
+    }
+
+    .search-container .search-icon {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      font-size: 18px;
     }
 
     .movie {
@@ -96,6 +111,7 @@
     #favorites {
       margin-top: 30px;
     }
+
   </style>
 </head>
 <body>
@@ -103,7 +119,10 @@
 <header>
   <img src="logo.jpg" alt="logo">
   <h1>Film Collection</h1>
-  <input type="text" id="search" placeholder="ابحث عن فيلم...">
+  <div class="search-container">
+    <input type="text" id="search" placeholder="ابحث عن فيلم...">
+    <span class="search-icon">🔍</span>
+  </div>
 </header>
 
 <div id="movies-list">
@@ -166,7 +185,6 @@
     overlay.style.display = 'none';
   });
 
-  // البحث
   const searchInput = document.getElementById('search');
   searchInput.addEventListener('input', () => {
     const term = searchInput.value.trim();
@@ -181,4 +199,4 @@
 </script>
 
 </body>
-</html>
+    </html>
