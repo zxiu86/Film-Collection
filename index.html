@@ -1,48 +1,109 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>مجموعة الأفلام</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Film Collection</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: white;
+      font-family: "Tahoma", sans-serif;
+      margin: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #1a1a1a;
+      box-shadow: 0 0 10px red;
+    }
+
+    header img {
+      width: 80px;
+      height: auto;
+      margin-right: 10px;
+      filter: drop-shadow(0 0 8px red);
+    }
+
+    header h1 {
+      font-size: 32px;
+      color: white;
+      text-shadow: 0 0 10px red;
+    }
+
+    .movie {
+      margin-top: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .movie img {
+      width: 60%;
+      max-width: 500px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px red;
+      transition: transform 0.3s ease;
+    }
+
+    .movie img:hover {
+      transform: scale(1.05);
+    }
+
+    .movie h2 {
+      margin-top: 15px;
+      font-size: 28px;
+      color: #ff4444;
+    }
+
+    .watch-btn {
+      background: transparent;
+      border: 2px solid red;
+      color: white;
+      padding: 10px 30px;
+      font-size: 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .watch-btn:hover {
+      background: red;
+      color: white;
+      box-shadow: 0 0 15px red;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+  </style>
 </head>
-<body class="dark-mode">
+<body>
   <header>
-    <img src="images/logo.png" alt="شعار مجموعة الأفلام">
-    <h1>مجموعة الأفلام</h1>
-    <input type="text" id="search" placeholder="ابحث عن فيلم...">
-    <button id="filter">فلتر</button>
-    <button id="toggle-theme">الوضع الفاتح/الغامق</button>
+    <img src="images/Logo.png" alt="Logo">
+    <h1>Film Collection</h1>
   </header>
 
-  <div id="movies-list">
-    <div class="movie" data-description="وصف TEST1" data-rating="7.5" data-duration="120 دقيقة" data-company="استوديو 1">
-      <img src="images/test1.jpg" alt="test1">
-      <h2>test1</h2>
-    </div>
-    <div class="movie" data-description="وصف test 2" data-rating="8.2" data-duration="110 دقيقة" data-company="استوديو 2">
-      <img src="images/test2.jpg" alt="test 2">
-      <h2>test 2</h2>
-    </div>
-    <div class="movie" data-description="وصف test 3" data-rating="6.9" data-duration="95 دقيقة" data-company="استوديو 3">
-      <img src="images/test3.jpg" alt="test3">
-      <h2>test 3</h2>
-    </div>
-  </div>
-
-  <div id="movie-modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <img id="modal-img" src="" alt="">
-      <h2 id="modal-title"></h2>
-      <p id="modal-description"></p>
-      <p id="modal-rating"></p>
-      <p id="modal-duration"></p>
-      <p id="modal-company"></p>
-      <button id="watch-btn">شاهد الآن</button>
-      <button id="favorite-btn">أضف إلى المفضلة</button>
+  <section class="movie">
+    <img src="images/test1.jpg" alt="Movie Poster">
+    <h2>فيلم الاختبار</h2>
+    <button class="watch-btn" onclick="window.open('https://example.com', '_blank')">مشاهدة</button>
+  </section>
+</body>
+</html>مفضلة</button>
+      </div>
     </div>
   </div>
 
   <script src="script.js"></script>
 </body>
-  </html>
+</html>
