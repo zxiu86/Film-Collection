@@ -1,31 +1,68 @@
 body {
-  background-color: #111; /* Dark mode */
+  background-color: #111;
   color: white;
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
+  transition: all 0.3s ease;
+}
+
+body.light-mode {
+  background-color: #f5f5f5;
+  color: #111;
+}
+
+body.light-mode .movie {
+  background-color: #fff;
+  color: #111;
+}
+
+body.light-mode .details {
+  background-color: #eee;
 }
 
 header {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  border-bottom: 2px solid blue; /* Flicker edge effect */
+  padding: 15px 20px;
+  border-bottom: 2px solid blue;
+  flex-wrap: wrap;
 }
 
-input#search {
+.logo-title {
+  display: flex;
+  align-items: center;
+}
+
+.logo-title img {
+  margin-right: 10px;
+  animation: glow 2s infinite alternate;
+}
+
+.logo-title h1 {
+  font-size: 1.5em;
+}
+
+.search-filter {
+  display: flex;
+  align-items: center;
+}
+
+.search-filter input#search {
   padding: 5px;
   border-radius: 5px;
+  margin-right: 5px;
+  min-width: 200px;
 }
 
-button {
+.search-filter button {
   padding: 5px 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
+  background-color: #0044ff;
   cursor: pointer;
-  background-color: #0044ff; /* Blue glow */
-  color: white;
+  margin-left: 5px;
 }
 
 #movies-list {
@@ -42,14 +79,47 @@ button {
   border-radius: 10px;
   width: 200px;
   text-align: center;
+  transition: all 0.3s ease;
 }
 
 .movie img {
   width: 100%;
   border-radius: 10px;
+  cursor: pointer;
+}
+
+.details {
+  margin-top: 10px;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 8px;
+  display: none;
+  transition: all 0.5s ease;
 }
 
 .movie button.watch {
-  background-color: #0033cc;
-  margin-top: 5px;
+  background: linear-gradient(45deg, #0066ff, #0033cc);
+  color: white;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px #0066ff;
+  transition: all 0.3s ease;
 }
+
+.movie button.watch:hover {
+  box-shadow: 0 0 20px #00aaff;
+  transform: scale(1.05);
+}
+
+header img {
+  display: block;
+  margin: 0 auto;
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 0px #007bff); }
+  to { filter: drop-shadow(0 0 15px #007bff); }
+  }
