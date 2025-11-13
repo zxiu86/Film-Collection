@@ -15,3 +15,17 @@ function showDetails(movieElement) {
 function closeDetails() {
   document.getElementById("movie-details").classList.add("hidden");
 }
+
+const searchIcon = document.getElementById("search-icon");
+const searchPopup = document.getElementById("search-popup");
+const closeSearch = document.getElementById("close-search");
+const searchInput = document.getElementById("search-input");
+
+searchIcon.addEventListener("click", () => {
+  searchPopup.classList.add("show");
+  searchInput.focus();
+});
+
+closeSearch.addEventListener("click", () => {
+  searchPopup.classList.remove("show");
+});
