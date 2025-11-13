@@ -1,317 +1,46 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Film Collection</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Tahoma", sans-serif;
-      text-align: center;
-      background-color: #0d0d0d;
-      color: white;
-      transition: background 0.5s, color 0.5s;
-    }
-
-    body.light-mode {
-      background-color: #f0f0f0;
-      color: #111;
-    }
-
-    header {
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #1a1a1a;
-      box-shadow: 0 0 10px red;
-      position: relative;
-      transition: background 0.5s, box-shadow 0.5s;
-    }
-
-    body.light-mode header {
-      background: #ddd;
-      box-shadow: 0 0 10px orange;
-    }
-
-    header img {
-      width: 60px;
-      height: auto;
-      margin-right: 15px;
-      filter: drop-shadow(0 0 8px red);
-      transition: filter 0.5s;
-    }
-
-    body.light-mode header img {
-      filter: drop-shadow(0 0 8px orange);
-    }
-
-    header h1 {
-      font-size: 28px;
-      color: white;
-      text-shadow: 0 0 10px red;
-      margin: 0;
-      position: relative;
-      transition: color 0.5s, text-shadow 0.5s;
-    }
-
-    body.light-mode header h1 {
-      color: #111;
-      text-shadow: 0 0 10px orange;
-    }
-
-    /* البحث العصري 🔍 داخل العنوان */
-    .search-container {
-      position: absolute;
-      right: -180px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: inline-block;
-    }
-
-    .search-container input {
-      width: 30px;
-      height: 30px;
-      border-radius: 15px;
-      border: none;
-      padding: 0 10px 0 5px;
-      font-size: 16px;
-      transition: width 0.3s ease, background 0.5s, color 0.5s;
-      background-color: #222;
-      color: white;
-    }
-
-    body.light-mode .search-container input {
-      background-color: #fff;
-      color: #111;
-    }
-
-    .search-container input:focus {
-      width: 150px;
-      outline: none;
-    }
-
-    .search-container .search-icon {
-      position: absolute;
-      right: 5px;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-      font-size: 18px;
-      color: white;
-    }
-
-    body.light-mode .search-container .search-icon {
-      color: #111;
-    }
-
-    .movie {
-      display: inline-block;
-      margin: 20px;
-      cursor: pointer;
-    }
-
-    .movie img {
-      width: 200px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px red;
-      transition: transform 0.3s ease, box-shadow 0.5s;
-    }
-
-    body.light-mode .movie img {
-      box-shadow: 0 0 15px orange;
-    }
-
-    .movie img:hover {
-      transform: scale(1.05);
-    }
-
-    .movie h2 {
-      margin-top: 8px;
-      font-size: 20px;
-      color: #ff4444;
-      transition: color 0.5s;
-    }
-
-    body.light-mode .movie h2 {
-      color: orange;
-    }
-
-    .watch-btn {
-      background: transparent;
-      border: 2px solid red;
-      color: white;
-      padding: 10px 30px;
-      font-size: 16px;
-      border-radius: 25px;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: all 0.3s ease;
-    }
-
-    body.light-mode .watch-btn {
-      border-color: orange;
-      color: #111;
-    }
-
-    .watch-btn:hover {
-      background: red;
-      color: white;
-      box-shadow: 0 0 15px red;
-    }
-
-    body.light-mode .watch-btn:hover {
-      background: orange;
-      color: #fff;
-      box-shadow: 0 0 15px orange;
-    }
-
-    #popup {
-      display: none;
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: #222;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px red;
-      z-index: 10;
-      transition: background 0.5s, box-shadow 0.5s;
-    }
-
-    body.light-mode #popup {
-      background: #fff;
-      color: #111;
-      box-shadow: 0 0 20px orange;
-    }
-
-    #overlay {
-      display: none;
-      position: fixed;
-      top:0; left:0;
-      width:100%; height:100%;
-      background: rgba(0,0,0,0.7);
-      z-index: 5;
-    }
-
-    #favorites {
-      margin-top: 30px;
-    }
-
-    /* Dark/Light toggle button */
-    #mode-toggle {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      padding: 5px 10px;
-      border-radius: 10px;
-      border: none;
-      background-color: #ff4444;
-      color: white;
-    }
-
-    body.light-mode #mode-toggle {
-      background-color: orange;
-      color: #111;
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Film Collection</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <header>
-  <img src="logo.jpg" alt="logo">
-  <h1>Film Collection
-    <span class="search-container">
-      <input type="text" id="search">
-      <span class="search-icon">🔍</span>
-    </span>
-  </h1>
-  <button id="mode-toggle">تغيير الوضع</button>
+  <img src="logo.jpg" alt="Logo" class="logo">
+  <h1>Film Collection</h1>
+  <div class="search-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30">
+      <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
+    </svg>
+  </div>
+  <div class="toggle-btn" onclick="toggleMode()">🌙</div>
 </header>
 
-<div id="movies-list">
-  <div class="movie" data-name="فيلم الاختبار" data-rating="7.5" data-duration="120 دقيقة" data-link="https://example.com">
-    <img src="test1.jpg" alt="فيلم الاختبار">
+<main id="movies-list">
+  <div class="movie" onclick="showDetails(this)">
+    <img src="test1.jpg" alt="Movie Poster">
     <h2>فيلم الاختبار</h2>
   </div>
-  <!-- أضف المزيد من الأفلام بنفس الشكل -->
+  <div class="movie" onclick="showDetails(this)">
+    <img src="test2.jpg" alt="Movie Poster">
+    <h2>فيلم الاختبار 2</h2>
+  </div>
+</main>
+
+<!-- تفاصيل الفلم تظهر عند الضغط -->
+<div id="movie-details" class="hidden">
+  <div class="details-content">
+    <span class="close-btn" onclick="closeDetails()">×</span>
+    <h2 id="detail-title"></h2>
+    <p id="detail-rating"></p>
+    <p id="detail-duration"></p>
+    <button id="watch-btn" onclick="">مشاهدة</button>
+    <button id="fav-btn" onclick="">إضافة إلى المفضلة</button>
+  </div>
 </div>
 
-<h2>المفضلة:</h2>
-<div id="favorites"></div>
-
-<div id="overlay"></div>
-<div id="popup">
-  <h2 id="popup-title"></h2>
-  <p id="popup-rating"></p>
-  <p id="popup-duration"></p>
-  <a id="popup-link" href="#" target="_blank">مشاهدة الفيلم</a><br>
-  <button id="add-fav">أضف للمفضلة</button>
-  <button id="close-popup">اغلاق</button>
-</div>
-
-<script>
-  const body = document.body;
-  const modeBtn = document.getElementById('mode-toggle');
-  modeBtn.addEventListener('click', () => {
-    body.classList.toggle('light-mode');
-    body.classList.toggle('dark-mode');
-  });
-
-  const movies = document.querySelectorAll('.movie');
-  const popup = document.getElementById('popup');
-  const overlay = document.getElementById('overlay');
-  const favoritesDiv = document.getElementById('favorites');
-
-  const popupTitle = document.getElementById('popup-title');
-  const popupRating = document.getElementById('popup-rating');
-  const popupDuration = document.getElementById('popup-duration');
-  const popupLink = document.getElementById('popup-link');
-  const addFavBtn = document.getElementById('add-fav');
-
-  let currentMovie = null;
-
-  movies.forEach(movie => {
-    movie.addEventListener('click', () => {
-      currentMovie = movie;
-      popupTitle.textContent = movie.dataset.name;
-      popupRating.textContent = "التقييم: " + movie.dataset.rating;
-      popupDuration.textContent = "المدة: " + movie.dataset.duration;
-      popupLink.href = movie.dataset.link;
-      popup.style.display = 'block';
-      overlay.style.display = 'block';
-    });
-  });
-
-  document.getElementById('close-popup').addEventListener('click', () => {
-    popup.style.display = 'none';
-    overlay.style.display = 'none';
-  });
-
-  addFavBtn.addEventListener('click', () => {
-    const fav = document.createElement('div');
-    fav.textContent = currentMovie.dataset.name;
-    favoritesDiv.appendChild(fav);
-    popup.style.display = 'none';
-    overlay.style.display = 'none';
-  });
-
-  const searchInput = document.getElementById('search');
-  searchInput.addEventListener('input', () => {
-    const term = searchInput.value.trim();
-    movies.forEach(movie => {
-      if (movie.dataset.name.includes(term)) {
-        movie.style.display = 'inline-block';
-      } else {
-        movie.style.display = 'none';
-      }
-    });
-  });
-</script>
-
+<script src="script.js"></script>
 </body>
-      </html>
+</html>
