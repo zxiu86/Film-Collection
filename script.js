@@ -1,21 +1,3 @@
-function toggleMode() {
-  document.body.classList.toggle("light");
-  document.querySelector('.toggle-btn').textContent = document.body.classList.contains("light") ? "☀" : "🌙";
-}
-
-// تفاصيل الفلم
-function showDetails(movieElement) {
-  const title = movieElement.querySelector("h2").textContent;
-  document.getElementById("detail-title").textContent = title;
-  document.getElementById("detail-rating").textContent = "IMDb: 7.5"; // ضع تقييم الفلم
-  document.getElementById("detail-duration").textContent = "المدة: 120 دقيقة"; // مدة الفلم
-  document.getElementById("movie-details").classList.remove("hidden");
-}
-
-function closeDetails() {
-  document.getElementById("movie-details").classList.add("hidden");
-}
-
 const searchIcon = document.getElementById("search-icon");
 const searchPopup = document.getElementById("search-popup");
 const closeSearch = document.getElementById("close-search");
@@ -29,3 +11,14 @@ searchIcon.addEventListener("click", () => {
 closeSearch.addEventListener("click", () => {
   searchPopup.classList.remove("show");
 });
+
+// وضع الليل/النهار (غامق/فاتح)
+function toggleMode() {
+  if (document.body.style.backgroundColor === "white") {
+    document.body.style.backgroundColor = "#0d0d0d";
+    document.body.style.color = "white";
+  } else {
+    document.body.style.backgroundColor = "white";
+    document.body.style.color = "black";
+  }
+}
