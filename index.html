@@ -1,64 +1,50 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Film Collection</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dark-mode">
   <header>
-    <div class="logo-title">
-      <img src="images/logo.png" alt="Film Collection Logo" width="80">
-      <h1>Film Collection</h1>
-    </div>
-    <div class="search-filter">
-      <input type="text" id="search" placeholder="ابحث عن فيلم...">
-      <button id="filter">فلتر</button>
-      <button id="toggle-dark">فاتح / غامق</button>
-    </div>
+    <img src="images/logo.png" alt="Film Collection Logo">
+    <h1>Film Collection</h1>
+    <input type="text" id="search" placeholder="Search movies...">
+    <button id="filter">Filter</button>
+    <button id="toggle-theme">Toggle Light/Dark</button>
   </header>
 
   <div id="movies-list">
-    <div class="movie">
-      <img class="movie-img" src="images/TEST1.jpg" alt="TEST1">
+    <div class="movie" data-description="Description of TEST1" data-rating="7.5" data-duration="120 min" data-company="Studio 1">
+      <img src="images/TEST1.jpg" alt="TEST1">
       <h2>TEST1</h2>
-      <div class="details">
-        <p class="description">وصف فيلم TEST1</p>
-        <p class="rating">IMDb: 7.5</p>
-        <p class="duration">المدة: 120 دقيقة</p>
-        <p class="company">شركة الإنتاج: Studio 1</p>
-        <button class="watch" data-link="https://example.com/movie1">شاهد الآن</button>
-        <button class="favorite">أضف للمفضلة</button>
-      </div>
     </div>
-
-    <div class="movie">
-      <img class="movie-img" src="images/TEST2.jpg" alt="TEST2">
+    <div class="movie" data-description="Description of TEST2" data-rating="8.2" data-duration="110 min" data-company="Studio 2">
+      <img src="images/TEST2.jpg" alt="TEST2">
       <h2>TEST2</h2>
-      <div class="details">
-        <p class="description">وصف فيلم TEST2</p>
-        <p class="rating">IMDb: 8.2</p>
-        <p class="duration">المدة: 110 دقيقة</p>
-        <p class="company">شركة الإنتاج: Studio 2</p>
-        <button class="watch" data-link="https://example.com/movie2">شاهد الآن</button>
-        <button class="favorite">أضف للمفضلة</button>
-      </div>
     </div>
-
-    <div class="movie">
-      <img class="movie-img" src="images/TEST3.jpg" alt="TEST3">
+    <div class="movie" data-description="Description of TEST3" data-rating="6.9" data-duration="95 min" data-company="Studio 3">
+      <img src="images/TEST3.jpg" alt="TEST3">
       <h2>TEST3</h2>
-      <div class="details">
-        <p class="description">وصف فيلم TEST3</p>
-        <p class="rating">IMDb: 6.9</p>
-        <p class="duration">المدة: 95 دقيقة</p>
-        <p class="company">شركة الإنتاج: Studio 3</p>
-        <button class="watch" data-link="https://example.com/movie3">شاهد الآن</button>
-        <button class="favorite">أضف للمفضلة</button>
-      </div>
+    </div>
+    <!-- Add more movies the same way -->
+  </div>
+
+  <!-- Modal for movie details -->
+  <div id="movie-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img id="modal-img" src="" alt="">
+      <h2 id="modal-title"></h2>
+      <p id="modal-description"></p>
+      <p id="modal-rating"></p>
+      <p id="modal-duration"></p>
+      <p id="modal-company"></p>
+      <button id="watch-btn">Watch Now</button>
+      <button id="favorite-btn">Add to Favorites</button>
     </div>
   </div>
 
   <script src="script.js"></script>
 </body>
-        </html>
+</html>
