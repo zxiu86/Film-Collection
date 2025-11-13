@@ -1,36 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>Film Collection</title>
+  <title>مجموعة الأفلام</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-mode">
   <header>
-    <img src="images/logo.png" alt="Film Collection Logo">
-    <h1>Film Collection</h1>
-    <input type="text" id="search" placeholder="Search movies...">
-    <button id="filter">Filter</button>
-    <button id="toggle-theme">Toggle Light/Dark</button>
+    <img src="images/logo.png" alt="شعار مجموعة الأفلام">
+    <h1>مجموعة الأفلام</h1>
+    <input type="text" id="search" placeholder="ابحث عن فيلم...">
+    <button id="filter">فلتر</button>
+    <button id="toggle-theme">الوضع الفاتح/الغامق</button>
   </header>
 
   <div id="movies-list">
-    <div class="movie" data-description="Description of TEST1" data-rating="7.5" data-duration="120 min" data-company="Studio 1">
+    <div class="movie" data-description="وصف TEST1" data-rating="7.5" data-duration="120 دقيقة" data-company="استوديو 1">
       <img src="images/TEST1.jpg" alt="TEST1">
       <h2>TEST1</h2>
     </div>
-    <div class="movie" data-description="Description of TEST2" data-rating="8.2" data-duration="110 min" data-company="Studio 2">
+    <div class="movie" data-description="وصف TEST2" data-rating="8.2" data-duration="110 دقيقة" data-company="استوديو 2">
       <img src="images/TEST2.jpg" alt="TEST2">
       <h2>TEST2</h2>
     </div>
-    <div class="movie" data-description="Description of TEST3" data-rating="6.9" data-duration="95 min" data-company="Studio 3">
+    <div class="movie" data-description="وصف TEST3" data-rating="6.9" data-duration="95 دقيقة" data-company="استوديو 3">
       <img src="images/TEST3.jpg" alt="TEST3">
       <h2>TEST3</h2>
     </div>
-    <!-- Add more movies the same way -->
   </div>
 
-  <!-- Modal for movie details -->
   <div id="movie-modal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -40,11 +38,11 @@
       <p id="modal-rating"></p>
       <p id="modal-duration"></p>
       <p id="modal-company"></p>
-      <button id="watch-btn">Watch Now</button>
-      <button id="favorite-btn">Add to Favorites</button>
+      <button id="watch-btn">شاهد الآن</button>
+      <button id="favorite-btn">أضف إلى المفضلة</button>
     </div>
   </div>
 
   <script src="script.js"></script>
 </body>
-</html>
+  </html>
